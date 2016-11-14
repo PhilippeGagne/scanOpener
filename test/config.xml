@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ParameterStruct xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <BaseDir>Z:\xfert\test\base</BaseDir>
+  <ConversionFilePath>C:\Users\Philippe Gagné\Documents\Visual Studio 2015\Projects\MiSuperLauncher\test\Conversion.txt</ConversionFilePath>
+  <PdfReaderProcessName>AcroRd32</PdfReaderProcessName>
+  <OpenFileExpression />
+  <CodeReaderComPort>com8</CodeReaderComPort>
+  <DebugMode>false</DebugMode>
+  <AutoConnectMode>false</AutoConnectMode>
+  <UseGlobalFilePattern>false</UseGlobalFilePattern>
+  <OldConvertInterpretation>false</OldConvertInterpretation>
+  <AskUserValidation>false</AskUserValidation>
+  <CloseExplorerWindows>true</CloseExplorerWindows>
+  <CloseViewers>true</CloseViewers>
+  <MinimizeApplication>true</MinimizeApplication>
+  <OpenBaseDirExplorerWindow>true</OpenBaseDirExplorerWindow>
+</ParameterStruct>
