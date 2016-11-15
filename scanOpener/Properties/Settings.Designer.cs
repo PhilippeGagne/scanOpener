@@ -134,18 +134,6 @@ namespace scanOpener.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool OldConvertInterpretation {
-            get {
-                return ((bool)(this["OldConvertInterpretation"]));
-            }
-            set {
-                this["OldConvertInterpretation"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool AskUserValidation {
             get {
                 return ((bool)(this["AskUserValidation"]));

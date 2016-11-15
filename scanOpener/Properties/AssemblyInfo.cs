@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MiSuperLauncher")]
+[assembly: AssemblyTitle("scanOpener")]
 [assembly: AssemblyDescription("​​")]
 [assembly: AssemblyConfiguration("Steris")]
 [assembly: AssemblyCompany("Philippe Gagné")]
-[assembly: AssemblyProduct("MiSuperLauncher")]
+[assembly: AssemblyProduct("scanOpener")]
 [assembly: AssemblyCopyright("Copyright ©  2016, Philippe Gagné")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

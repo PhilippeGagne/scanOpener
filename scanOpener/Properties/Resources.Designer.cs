@@ -39,7 +39,7 @@ namespace scanOpener.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MiSuperLauncher.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("scanOpener.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -64,13 +64,9 @@ namespace scanOpener.Properties {
         ///   Recherche une chaîne localisée semblable à Copyright (c) 2016, Philippe Gagné
         ///All rights reserved.
         ///​
-        ///Redistribution and use in source and binary forms, with or without
-        ///modification, are permitted provided that the following conditions are met:
-        ///* Redistributions of source code must retain the above copyright
-        ///notice, this list of conditions and the following disclaimer.
-        ///* Redistributions in binary form must reproduce the above copyright
-        ///notice, this list of conditions and the following disclaimer in the
-        ///documentation and/or other materials pr [le reste de la chaîne a été tronqué]&quot;;.
+        ///Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+        ///* Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+        ///* Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided wi [le reste de la chaîne a été tronqué]&quot;;.
         /// </summary>
         internal static string LicenseText {
             get {

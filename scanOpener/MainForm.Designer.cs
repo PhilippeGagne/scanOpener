@@ -113,6 +113,7 @@
             this.txtMessage.Multiline = true;
             this.txtMessage.Name = "txtMessage";
             this.txtMessage.ReadOnly = true;
+            this.txtMessage.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtMessage.Size = new System.Drawing.Size(543, 262);
             this.txtMessage.TabIndex = 12;
             this.txtMessage.TabStop = false;
@@ -239,7 +240,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(440, 370);
             this.Name = "MainForm";
-            this.Text = "scanOpener";
+            this.Text = "config.xml [modifié] - scanOpener";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);

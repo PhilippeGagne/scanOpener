@@ -41,7 +41,6 @@ namespace scanOpener
             parameters.OpenFileExpression = txtOpenExpression.Text;
 
             parameters.UseGlobalFilePattern = chkUseGlobalPattern.Checked;
-            parameters.OldConvertInterpretation = chkOldConversionInterpret.Checked;
             parameters.AskUserValidation = chkAskUserValidation.Checked;
 
             parameters.CloseExplorerWindows = chkCloseExplorerWindows.Checked;
@@ -62,7 +61,6 @@ namespace scanOpener
             txtOpenExpression.Text = parameters.OpenFileExpression;
 
             chkUseGlobalPattern.Checked = parameters.UseGlobalFilePattern;
-            chkOldConversionInterpret.Checked = parameters.OldConvertInterpretation;
             chkAskUserValidation.Checked = parameters.AskUserValidation;
 
             chkCloseExplorerWindows.Checked = parameters.CloseExplorerWindows;

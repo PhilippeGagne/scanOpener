@@ -44,7 +44,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtOpenExpression = new System.Windows.Forms.TextBox();
             this.chkUseGlobalPattern = new System.Windows.Forms.CheckBox();
-            this.chkOldConversionInterpret = new System.Windows.Forms.CheckBox();
             this.chkAskUserValidation = new System.Windows.Forms.CheckBox();
             this.btnOpenConversionFile = new System.Windows.Forms.Button();
             this.btnOpenBaseDir = new System.Windows.Forms.Button();
@@ -56,12 +55,13 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnOpenDeviceManagementWindow = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.guiTimer = new System.Windows.Forms.Timer(this.components);
-            this.btnOpenDeviceManagementWindow = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -74,7 +74,7 @@
             // 
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExit.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnExit.Location = new System.Drawing.Point(595, 528);
+            this.btnExit.Location = new System.Drawing.Point(517, 551);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(100, 35);
             this.btnExit.TabIndex = 3;
@@ -85,7 +85,7 @@
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button1.Location = new System.Drawing.Point(701, 528);
+            this.button1.Location = new System.Drawing.Point(623, 551);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 35);
             this.button1.TabIndex = 4;
@@ -171,35 +171,35 @@
             // 
             // txtPdfProcess
             // 
-            this.txtPdfProcess.Location = new System.Drawing.Point(123, 22);
+            this.txtPdfProcess.Location = new System.Drawing.Point(195, 19);
             this.txtPdfProcess.Name = "txtPdfProcess";
-            this.txtPdfProcess.Size = new System.Drawing.Size(320, 22);
+            this.txtPdfProcess.Size = new System.Drawing.Size(321, 22);
             this.txtPdfProcess.TabIndex = 0;
             this.txtPdfProcess.TabStop = false;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(4, 22);
+            this.label4.Location = new System.Drawing.Point(7, 18);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(82, 17);
+            this.label4.Size = new System.Drawing.Size(134, 17);
             this.label4.TabIndex = 15;
-            this.label4.Text = "Processus :";
+            this.label4.Text = "Nom du processus :";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(7, 79);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(113, 17);
+            this.label5.Size = new System.Drawing.Size(182, 17);
             this.label5.TabIndex = 17;
-            this.label5.Text = "Fichiers à ouvrir:";
+            this.label5.Text = "Patron des fichiers à ouvrir:";
             // 
             // txtOpenExpression
             // 
-            this.txtOpenExpression.Location = new System.Drawing.Point(126, 76);
+            this.txtOpenExpression.Location = new System.Drawing.Point(195, 76);
             this.txtOpenExpression.Name = "txtOpenExpression";
-            this.txtOpenExpression.Size = new System.Drawing.Size(415, 22);
+            this.txtOpenExpression.Size = new System.Drawing.Size(346, 22);
             this.txtOpenExpression.TabIndex = 0;
             this.txtOpenExpression.TabStop = false;
             // 
@@ -213,20 +213,10 @@
             this.chkUseGlobalPattern.Text = "Utiliser le patron";
             this.chkUseGlobalPattern.UseVisualStyleBackColor = true;
             // 
-            // chkOldConversionInterpret
-            // 
-            this.chkOldConversionInterpret.AutoSize = true;
-            this.chkOldConversionInterpret.Location = new System.Drawing.Point(19, 528);
-            this.chkOldConversionInterpret.Name = "chkOldConversionInterpret";
-            this.chkOldConversionInterpret.Size = new System.Drawing.Size(250, 21);
-            this.chkOldConversionInterpret.TabIndex = 2;
-            this.chkOldConversionInterpret.Text = "Ancienne interprétation conversion";
-            this.chkOldConversionInterpret.UseVisualStyleBackColor = true;
-            // 
             // chkAskUserValidation
             // 
             this.chkAskUserValidation.AutoSize = true;
-            this.chkAskUserValidation.Location = new System.Drawing.Point(12, 32);
+            this.chkAskUserValidation.Location = new System.Drawing.Point(10, 24);
             this.chkAskUserValidation.Name = "chkAskUserValidation";
             this.chkAskUserValidation.Size = new System.Drawing.Size(240, 21);
             this.chkAskUserValidation.TabIndex = 0;
@@ -258,17 +248,17 @@
             // chkCloseExplorerWindows
             // 
             this.chkCloseExplorerWindows.AutoSize = true;
-            this.chkCloseExplorerWindows.Location = new System.Drawing.Point(452, 49);
+            this.chkCloseExplorerWindows.Location = new System.Drawing.Point(466, 47);
             this.chkCloseExplorerWindows.Name = "chkCloseExplorerWindows";
-            this.chkCloseExplorerWindows.Size = new System.Drawing.Size(179, 21);
+            this.chkCloseExplorerWindows.Size = new System.Drawing.Size(241, 21);
             this.chkCloseExplorerWindows.TabIndex = 2;
-            this.chkCloseExplorerWindows.Text = "Fermer les explorateurs";
+            this.chkCloseExplorerWindows.Text = "Fermer les explorateurs de fichier";
             this.chkCloseExplorerWindows.UseVisualStyleBackColor = true;
             // 
             // chkCloseViewers
             // 
             this.chkCloseViewers.AutoSize = true;
-            this.chkCloseViewers.Location = new System.Drawing.Point(452, 22);
+            this.chkCloseViewers.Location = new System.Drawing.Point(538, 21);
             this.chkCloseViewers.Name = "chkCloseViewers";
             this.chkCloseViewers.Size = new System.Drawing.Size(163, 21);
             this.chkCloseViewers.TabIndex = 1;
@@ -290,9 +280,9 @@
             this.chkOpenBaseDir.AutoSize = true;
             this.chkOpenBaseDir.Location = new System.Drawing.Point(10, 48);
             this.chkOpenBaseDir.Name = "chkOpenBaseDir";
-            this.chkOpenBaseDir.Size = new System.Drawing.Size(214, 21);
+            this.chkOpenBaseDir.Size = new System.Drawing.Size(321, 21);
             this.chkOpenBaseDir.TabIndex = 3;
-            this.chkOpenBaseDir.Text = "Afficher le répertoire de base";
+            this.chkOpenBaseDir.Text = "Ouvrir le répertoire de base dans l\'explorateur";
             this.chkOpenBaseDir.UseVisualStyleBackColor = true;
             // 
             // chkAppendCodeToBasePath
@@ -300,10 +290,9 @@
             this.chkAppendCodeToBasePath.AutoSize = true;
             this.chkAppendCodeToBasePath.Location = new System.Drawing.Point(10, 21);
             this.chkAppendCodeToBasePath.Name = "chkAppendCodeToBasePath";
-            this.chkAppendCodeToBasePath.Size = new System.Drawing.Size(540, 21);
+            this.chkAppendCodeToBasePath.Size = new System.Drawing.Size(505, 21);
             this.chkAppendCodeToBasePath.TabIndex = 3;
-            this.chkAppendCodeToBasePath.Text = "Ajouter le code de l\'objet  (@) après le répertoire commun (i.e. z:\\commun\\code\\)" +
-    "";
+            this.chkAppendCodeToBasePath.Text = "Ajouter le code de l\'objet  (@) au répertoire commun (i.e. z:\\commun\\code\\)";
             this.chkAppendCodeToBasePath.UseVisualStyleBackColor = true;
             // 
             // groupBox1
@@ -337,55 +326,13 @@
             this.groupBox3.Controls.Add(this.txtComPort);
             this.groupBox3.Controls.Add(this.btnConnection);
             this.groupBox3.Controls.Add(this.chkAutoConnect);
+            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(12, 12);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(711, 88);
             this.groupBox3.TabIndex = 30;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Lecteur de code-barres";
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.chkAppendCodeToBasePath);
-            this.groupBox4.Controls.Add(this.label6);
-            this.groupBox4.Controls.Add(this.txtOpenExpression);
-            this.groupBox4.Controls.Add(this.label5);
-            this.groupBox4.Controls.Add(this.chkUseGlobalPattern);
-            this.groupBox4.Controls.Add(this.chkOpenBaseDir);
-            this.groupBox4.Location = new System.Drawing.Point(12, 252);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(713, 115);
-            this.groupBox4.TabIndex = 31;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Ouverture automatique";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(123, 98);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(237, 17);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "NB: @ représente le code de l\'objet.";
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.chkCloseViewers);
-            this.groupBox5.Controls.Add(this.chkCloseExplorerWindows);
-            this.groupBox5.Controls.Add(this.label4);
-            this.groupBox5.Controls.Add(this.txtPdfProcess);
-            this.groupBox5.Location = new System.Drawing.Point(12, 373);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(710, 77);
-            this.groupBox5.TabIndex = 32;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Fermeture automatique";
-            // 
-            // guiTimer
-            // 
-            this.guiTimer.Enabled = true;
-            this.guiTimer.Interval = 200;
-            this.guiTimer.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // btnOpenDeviceManagementWindow
             // 
@@ -398,27 +345,79 @@
             this.btnOpenDeviceManagementWindow.UseVisualStyleBackColor = true;
             this.btnOpenDeviceManagementWindow.Click += new System.EventHandler(this.btnOpenDeviceManagementWindow_Click);
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.chkAppendCodeToBasePath);
+            this.groupBox4.Controls.Add(this.label6);
+            this.groupBox4.Controls.Add(this.txtOpenExpression);
+            this.groupBox4.Controls.Add(this.label5);
+            this.groupBox4.Controls.Add(this.chkUseGlobalPattern);
+            this.groupBox4.Controls.Add(this.chkOpenBaseDir);
+            this.groupBox4.Location = new System.Drawing.Point(12, 252);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(713, 135);
+            this.groupBox4.TabIndex = 31;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Ouverture automatique";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(7, 101);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(434, 17);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "NB: @ représente le code de l\'objet. Séparer chaque item par ; ou :";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.label1);
+            this.groupBox5.Controls.Add(this.chkCloseViewers);
+            this.groupBox5.Controls.Add(this.chkCloseExplorerWindows);
+            this.groupBox5.Controls.Add(this.label4);
+            this.groupBox5.Controls.Add(this.txtPdfProcess);
+            this.groupBox5.Location = new System.Drawing.Point(12, 393);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(713, 77);
+            this.groupBox5.TabIndex = 32;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Fermeture automatique des fenêtres";
+            // 
+            // guiTimer
+            // 
+            this.guiTimer.Enabled = true;
+            this.guiTimer.Interval = 200;
+            this.guiTimer.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.chkAskUserValidation);
             this.groupBox6.Controls.Add(this.chkMinimizeApplication);
-            this.groupBox6.Location = new System.Drawing.Point(10, 458);
+            this.groupBox6.Location = new System.Drawing.Point(12, 476);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(712, 61);
+            this.groupBox6.Size = new System.Drawing.Size(711, 61);
             this.groupBox6.TabIndex = 33;
             this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Options";
+            this.groupBox6.Text = "Autres options";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 44);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(225, 17);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "Ex: AcroRd32 pour acrobat reader";
             // 
             // ParamsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(813, 575);
+            this.ClientSize = new System.Drawing.Size(735, 598);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.chkOldConversionInterpret);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.groupBox1);
@@ -439,7 +438,6 @@
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -459,7 +457,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtOpenExpression;
         private System.Windows.Forms.CheckBox chkUseGlobalPattern;
-        private System.Windows.Forms.CheckBox chkOldConversionInterpret;
         private System.Windows.Forms.CheckBox chkAskUserValidation;
         private System.Windows.Forms.Button btnOpenConversionFile;
         private System.Windows.Forms.Button btnOpenBaseDir;
@@ -477,5 +474,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnOpenDeviceManagementWindow;
         private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Label label1;
     }
 }

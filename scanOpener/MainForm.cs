@@ -25,7 +25,6 @@ namespace scanOpener
         public bool AppendCodeToBasePath;
 
         public bool UseGlobalFilePattern;
-        public bool OldConvertInterpretation;
         public bool AskUserValidation;
 
         public bool CloseExplorerWindows;
@@ -98,6 +97,9 @@ namespace scanOpener
                 txtMessage.Text += "Fait." + Environment.NewLine;
             }
 
+            if (Parameters.CloseExplorerWindows || (Parameters.CloseViewers && Parameters.PdfReaderProcessName.Length > 0))
+                txtMessage.Text += Environment.NewLine;
+
 
             // On a rien à faire ici si la sélection est vide.
             // TODO: filtrage contre les gremelins (espaces).
@@ -151,87 +153,67 @@ namespace scanOpener
             Debug.Assert(selected_files.Length >= 2);
 
             bool open_ok;
-            if (Parameters.OldConvertInterpretation)
+  
+            FileListerInfos[] files;
+
+            string code = selected_files[1];
+
+
+            if (Parameters.UseGlobalFilePattern && Parameters.OpenFileExpression.Length > 0)
             {
-                // Ancienne façon de fonctionner.
-                // TODO: ne plus utiliser quand on sera certain que la nouvelle manière de faire est bonne.
+                // La liste des fichiers à ouvrir vient du champ des parametres.
+                string[] patterns = Parameters.OpenFileExpression.Split(new[] { ';', ':', ',' });
+                for (int i = 0; i < patterns.Length; i++)
+                    patterns[i] = patterns[i].Trim();
 
-                // Validation optionnelle des opérations, avant de faire quoi que ce soit.
-                if (Parameters.AskUserValidation)
-                {
-                    // TODO: s'organiser pour avoir la liste des fichiers à ouvrir.
-                    bool valid = UserValidation(selected_files[0], selected_files[1], "");
-
-                    if (!valid)
-                        return;
-                }
-
-                // Mode ancien d'ouverture des fichiers selon la table de conversion. Pas de caractères génériques.
-                open_ok = Functions.OpenDirectoryAndFiles(Parameters.BaseDir, selected_files, txtMessage);
+                files = FileListerFunctions.FileLister(Parameters.BaseDir, 
+                                                        code, 
+                                                        patterns, 
+                                                        Parameters.OpenBaseDirExplorerWindow, 
+                                                        Parameters.AppendCodeToBasePath);
             }
             else
             {
-                FileListerInfos[] files;
+                // La liste des fichiers à ouvrir vient de la table de conversion.
 
-                string code = selected_files[1];
+                // On coupe les deux premières colonnes de la ligne de la table de conversion
+                // pour ne garder que les patterns de nom de fichier.
+                List<string> patterns = new List<string>();
+                for (int i = 2; i < selected_files.Length; i++)
+                    patterns.Add(selected_files[i]);
 
-
-                if (Parameters.UseGlobalFilePattern && Parameters.OpenFileExpression.Length > 0)
-                {
-                    // La liste des fichiers à ouvrir vient du champ des parametres.
-                    string[] patterns = Parameters.OpenFileExpression.Split(new[] { ';', ':', ',' });
-                    for (int i = 0; i < patterns.Length; i++)
-                        patterns[i] = patterns[i].Trim();
-
-                    files = FileListerFunctions.FileLister(Parameters.BaseDir, 
-                                                           code, 
-                                                           patterns, 
-                                                           Parameters.OpenBaseDirExplorerWindow, 
-                                                           Parameters.AppendCodeToBasePath);
-                }
-                else
-                {
-                    // La liste des fichiers à ouvrir vient de la table de conversion.
-
-                    // On coupe les deux premières colonnes de la ligne de la table de conversion
-                    // pour ne garder que les patterns de nom de fichier.
-                    List<string> patterns = new List<string>();
-                    for (int i = 2; i < selected_files.Length; i++)
-                        patterns.Add(selected_files[i]);
-
-                    files = FileListerFunctions.FileLister(Parameters.BaseDir,
-                                                           code, 
-                                                           patterns.ToArray(), 
-                                                           Parameters.OpenBaseDirExplorerWindow, 
-                                                           Parameters.AppendCodeToBasePath);
-                }
-
-                // Vérifie si on a des erreurs, ce qui ne devrait pas arriver.
-                if (MustStopFileListError(files))
-                {
-                    // TODO: log
-                    return;
-                }
-
-                // Validation optionnelle des opérations, avant de faire quoi que ce soit.
-                if (Parameters.AskUserValidation)
-                {
-                    string operations = "";
-                    foreach (var file in files)
-                    {
-                        operations += file.path + Environment.NewLine;
-                    }
-
-                    // TODO: s'organiser pour avoir la liste des fichiers à ouvrir.
-                    bool valid = UserValidation(selected_files[0], selected_files[1], operations);
-                    if (!valid)
-                        return;
-                }
-
-                // Rendu ici on peut ouvrir les fichiers.
-                open_ok = FileListerFunctions.FileOpener(files, true, true, txtMessage);
+                files = FileListerFunctions.FileLister(Parameters.BaseDir,
+                                                        code, 
+                                                        patterns.ToArray(), 
+                                                        Parameters.OpenBaseDirExplorerWindow, 
+                                                        Parameters.AppendCodeToBasePath);
             }
 
+            // Vérifie si on a des erreurs, ce qui ne devrait pas arriver.
+            if (MustStopFileListError(files))
+            {
+                // TODO: log
+                return;
+            }
+
+            // Validation optionnelle des opérations, avant de faire quoi que ce soit.
+            if (Parameters.AskUserValidation)
+            {
+                string operations = "";
+                foreach (var file in files)
+                {
+                    operations += file.path + Environment.NewLine;
+                }
+
+                // TODO: s'organiser pour avoir la liste des fichiers à ouvrir.
+                bool valid = UserValidation(selected_files[0], selected_files[1], operations);
+                if (!valid)
+                    return;
+            }
+
+            // Rendu ici on peut ouvrir les fichiers.
+            open_ok = FileListerFunctions.FileOpener(files, true, true, txtMessage);
+  
 
             if (!open_ok)
             {
@@ -389,7 +371,6 @@ namespace scanOpener
             Parameters.OpenFileExpression = Properties.Settings.Default.OpenFileExpression;
 
             Parameters.UseGlobalFilePattern = Properties.Settings.Default.UseGlobalFilePattern;
-            Parameters.OldConvertInterpretation = Properties.Settings.Default.OldConvertInterpretation;
             Parameters.AskUserValidation = Properties.Settings.Default.AskUserValidation;
 
             Parameters.CloseExplorerWindows = Properties.Settings.Default.CloseExplorerWindows;
@@ -413,7 +394,6 @@ namespace scanOpener
             Properties.Settings.Default.OpenFileExpression = Parameters.OpenFileExpression;
 
             Properties.Settings.Default.UseGlobalFilePattern = Parameters.UseGlobalFilePattern;
-            Properties.Settings.Default.OldConvertInterpretation = Parameters.OldConvertInterpretation;
             Properties.Settings.Default.AskUserValidation = Parameters.AskUserValidation;
 
             Properties.Settings.Default.CloseExplorerWindows = Parameters.CloseExplorerWindows;
