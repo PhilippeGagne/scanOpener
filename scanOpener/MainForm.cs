@@ -51,30 +51,33 @@ namespace scanOpener
 
             if (Parameters.AutoConnectMode && Parameters.CodeReaderComPort.Length > 0)
                   OpenSerialPort(Parameters.CodeReaderComPort);
+
+            // On prépare le GUI à recevoir un nouveau code
+            txtSelected.Text = "";
+            txtSelected.Focus();
         }
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
             ProcessOpenDirRequest();
+
+            // On prépare le GUI à recevoir un nouveau code
+            txtSelected.Text = "";
+            txtSelected.Focus();
         }
-        
+
+        /// <summary>
+        /// Fonction principale de l'application. Elle traite le code affiché dans le GUI.
+        /// </summary>
         private void ProcessOpenDirRequest()
         {
             // Code à barre.
             string selected = Functions.CleanupString(txtSelected.Text);
-//            // Répertoire de base où sont tous les sous répertoires.
-//            string base_dir = txtBaseDir.Text;
 
             // Liste des fichiers à ouvrir. La première colonne est
             // le répertoire où se trouvent les documents pertinents
             string[] selected_files = null;     
 
-//            // Fichier de conversion, première colonne est le code à barre,
-//            // la deuxième est le répertoire pertinent et les colonnes suivantes sont
-//            // des fichiers à ouvrir (dans le répertoire pertinent).
-//            string convert_file = txtConvertFile.Text;  
-
-//            bool debug_mode = chk_DebugMode.Checked;
             const string dialog_caption = "Ouverture d'un répertoire";
 
             // Initialise les messages d'ouverture.
@@ -100,17 +103,12 @@ namespace scanOpener
             if (Parameters.CloseExplorerWindows || (Parameters.CloseViewers && Parameters.PdfReaderProcessName.Length > 0))
                 txtMessage.Text += Environment.NewLine;
 
-
             // On a rien à faire ici si la sélection est vide.
             // TODO: filtrage contre les gremelins (espaces).
             if (selected.Length == 0)
             {
                 string message = "Rien de sélectionné.";
                 txtMessage.Text += message + Environment.NewLine;
-//                if (Parameters.DebugMode)
-//                {
-//                    MessageBox.Show(message, dialog_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
-//                }
                 return; // Rien de sélectionné.
             }
 
@@ -122,10 +120,6 @@ namespace scanOpener
 
                 string message = "Pas de fichier de conversion spécifié.";
                 txtMessage.Text += message + Environment.NewLine;
-//                if (Parameters.DebugMode)
-//                {
-//                    MessageBox.Show(message, dialog_caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
-//                }
             }
             if (Parameters.ConversionFilePath.Length > 0 && !File.Exists(Parameters.ConversionFilePath))
             {
@@ -157,7 +151,6 @@ namespace scanOpener
             FileListerInfos[] files;
 
             string code = selected_files[1];
-
 
             if (Parameters.UseGlobalFilePattern && Parameters.OpenFileExpression.Length > 0)
             {
