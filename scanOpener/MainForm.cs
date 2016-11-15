@@ -6,6 +6,7 @@ using System.Threading;
 using System.Xml.Serialization;
 using static scanOpener.FileListerFunctions;
 using System.Collections.Generic;
+using System.Configuration;
 
 namespace scanOpener
 {
@@ -55,11 +56,13 @@ namespace scanOpener
             // On prépare le GUI à recevoir un nouveau code
             txtSelected.Text = "";
             txtSelected.Focus();
+
+            UpdateGUI();
         }
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
-            ProcessOpenDirRequest();
+             ProcessOpenDirRequest();
 
             // On prépare le GUI à recevoir un nouveau code
             txtSelected.Text = "";
@@ -95,7 +98,7 @@ namespace scanOpener
             if (Parameters.CloseViewers && Parameters.PdfReaderProcessName.Length>0)
             {
                 txtMessage.Text += "Ménage des fenêtres d'affichage... ";
-                Functions.CloseAllPdfWindows(Parameters.PdfReaderProcessName);
+                Functions.CloseViewerWindows(Parameters.PdfReaderProcessName);
                 Application.DoEvents();
                 txtMessage.Text += "Fait." + Environment.NewLine;
             }
@@ -286,13 +289,42 @@ namespace scanOpener
 
         /// <summary>
         /// Mise à jour de l'état d'affichage du GUI.
+        /// 
+        /// On conseille de mettre timerTrigger à true lorsqu'on l'appele
+        /// à répétition par le timer: on ne fait alors que les ajustements
+        /// nécéssaires pour être plus rapide.
         /// </summary>
-        public void UpdateGUI()
+        public void UpdateGUI(bool timerTrigger = false)
         {
             // Vérifie si le port COM est ouvert et ajuste le GUI pour afficher l'état.
             bool connected = mySerialPort != null && mySerialPort.IsOpen;
             chkConnected.Checked = connected;
-         }
+
+            if (!timerTrigger)
+            {
+                // Titre de la fenêtre
+                string appName = AboutBox.AssemblyProduct;
+                string windowTitle;
+                if (Properties.Settings.Default.DocumentFilename.Length > 0)
+                {
+                    string modifiedText;
+                    if (Properties.Settings.Default.DocumentDirty)
+                        modifiedText = " [Modifié]";
+                    else
+                        modifiedText = "";
+
+                    windowTitle = string.Format(
+                        "{0} {1} - {2}",
+                        Path.GetFileName(Properties.Settings.Default.DocumentFilename),
+                        modifiedText,
+                        appName);
+                }
+                else
+                    windowTitle = appName;
+
+                this.Text = windowTitle;
+            }
+        }
 
         // This delegate enables asynchronous calls for setting
         // the text property on a TextBox control.
@@ -354,6 +386,9 @@ namespace scanOpener
             SaveSettings();
         }
 
+        /// <summary>
+        /// Lecture des paramètres visibles à partir du stockage usager.
+        /// </summary>
         private void LoadSettings()
         {
             Parameters.BaseDir = Properties.Settings.Default.BaseDir;
@@ -377,6 +412,9 @@ namespace scanOpener
             Height = Properties.Settings.Default.FormHeigth;
         }
 
+        /// <summary>
+        /// Sauvegarde des paramètres à partir du stockage usager.
+        /// </summary>
         private void SaveSettings()
         {
             Properties.Settings.Default.BaseDir = Parameters.BaseDir;
@@ -440,6 +478,8 @@ namespace scanOpener
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 Parameters = dlg.Parameters;
+
+                Properties.Settings.Default.DocumentDirty = true;
             }
 
             // On ne sait pas ce qui s'est passé dans le menu de configuration, 
@@ -450,44 +490,8 @@ namespace scanOpener
 
         private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AboutBox1 dlg = new AboutBox1();
+            AboutBox dlg = new AboutBox();
             dlg.ShowDialog();
-        }
-
-        private void importerLaConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog fbd = new OpenFileDialog();
-            fbd.Filter = "Fichier XML|*.xml|Tous les fichiers|*.*";
-            fbd.Title = "Importer une configuration";
-            fbd.CheckFileExists = true;
-
-            var result = fbd.ShowDialog();
-
-            if (result == DialogResult.OK)
-            {
-                XmlSerializer reader = new XmlSerializer(Parameters.GetType());
-
-                StreamReader file = new StreamReader(fbd.FileName);
-                Parameters = (ParameterStruct) reader.Deserialize(file);
-                file.Close();
-            }
-        }
-
-        private void exporterLaConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SaveFileDialog fbd = new SaveFileDialog();
-
-            fbd.Filter = "Fichier XML|*.xml|Tous les fichiers|*.*";
-            fbd.Title = "Exporter la configuration";
-            var result = fbd.ShowDialog();
-
-            if (result == DialogResult.OK)
-            {
-                XmlSerializer writer = new XmlSerializer(Parameters.GetType());
-                StreamWriter file = new StreamWriter(fbd.FileName);
-                writer.Serialize(file, Parameters);
-                file.Close();
-            }
         }
 
         private bool UserValidation(string barCode, string itemCode, string operations)
@@ -572,7 +576,76 @@ namespace scanOpener
 
         private void guiTimer_Tick(object sender, EventArgs e)
         {
+            UpdateGUI(true);
+        }
+
+        /// <summary>
+        /// Remise aux paramètres d'origine de la configuration.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void nouvelleConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Reset();
+            LoadSettings();
             UpdateGUI();
+        }
+
+        private void importerLaConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fbd = new OpenFileDialog();
+            fbd.Filter = "Fichier XML|*.xml|Tous les fichiers|*.*";
+            fbd.Title = "Importer une configuration";
+            fbd.CheckFileExists = true;
+
+            var result = fbd.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                XmlSerializer reader = new XmlSerializer(Parameters.GetType());
+
+                StreamReader file = new StreamReader(fbd.FileName);
+                Parameters = (ParameterStruct)reader.Deserialize(file);
+                file.Close();
+
+                Properties.Settings.Default.DocumentFilename = fbd.FileName;
+                Properties.Settings.Default.DocumentDirty = false;
+
+                UpdateGUI();
+            }
+        }
+
+        private void exporterLaConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog fbd = new SaveFileDialog();
+
+            fbd.Filter = "Fichier XML|*.xml|Tous les fichiers|*.*";
+            fbd.Title = "Exporter la configuration";
+
+            // Nom de la configuration précédente.
+            if (Properties.Settings.Default.DocumentFilename.Length > 0)
+            {
+                fbd.FileName = Path.GetFileName(Properties.Settings.Default.DocumentFilename);
+
+                string initialDirectory = Path.GetDirectoryName(Properties.Settings.Default.DocumentFilename);
+                if (Directory.Exists(initialDirectory))
+                    fbd.InitialDirectory = initialDirectory;
+            }
+
+            var result = fbd.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                XmlSerializer writer = new XmlSerializer(Parameters.GetType());
+                StreamWriter file = new StreamWriter(fbd.FileName);
+                writer.Serialize(file, Parameters);
+                file.Close();
+
+                Properties.Settings.Default.DocumentFilename = fbd.FileName;
+                Properties.Settings.Default.DocumentDirty = false;
+
+                UpdateGUI();
+            }
         }
     }
 }

@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace scanOpener
 {
-    partial class AboutBox1 : Form
+    partial class AboutBox : Form
     {
-        public AboutBox1()
+        public AboutBox()
         {
             InitializeComponent();
             this.Text = String.Format("À propos de {0}", AssemblyTitle);
@@ -26,7 +26,7 @@ namespace scanOpener
 
         #region Accesseurs d'attribut de l'assembly
 
-        public string AssemblyTitle
+        static public string AssemblyTitle
         {
             get
             {
@@ -43,7 +43,7 @@ namespace scanOpener
             }
         }
 
-        public string AssemblyVersion
+        static public string AssemblyVersion
         {
             get
             {
@@ -51,7 +51,7 @@ namespace scanOpener
             }
         }
 
-        public string AssemblyDescription
+        static public string AssemblyDescription
         {
             get
             {
@@ -64,7 +64,7 @@ namespace scanOpener
             }
         }
 
-        public string AssemblyProduct
+        static public string AssemblyProduct
         {
             get
             {
@@ -77,7 +77,7 @@ namespace scanOpener
             }
         }
 
-        public string AssemblyCopyright
+        static public string AssemblyCopyright
         {
             get
             {
@@ -90,7 +90,7 @@ namespace scanOpener
             }
         }
 
-        public string AssemblyCompany
+        static public string AssemblyCompany
         {
             get
             {

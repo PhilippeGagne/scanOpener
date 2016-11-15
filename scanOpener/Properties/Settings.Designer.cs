@@ -202,5 +202,29 @@ namespace scanOpener.Properties {
                 this["AppendCodeToBasePath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool DocumentDirty {
+            get {
+                return ((bool)(this["DocumentDirty"]));
+            }
+            set {
+                this["DocumentDirty"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DocumentFilename {
+            get {
+                return ((string)(this["DocumentFilename"]));
+            }
+            set {
+                this["DocumentFilename"] = value;
+            }
+        }
     }
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ParameterStruct xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <BaseDir>C:\Users\Philippe Gagné\Documents\Visual Studio 2015\Projects\scanOpener\test\base</BaseDir>
+  <ConversionFilePath>C:\Users\Philippe Gagné\Documents\visual studio 2015\Projects\scanOpener\test\Conversion.txt</ConversionFilePath>
+  <PdfReaderProcessName>AcroRd32;notepad</PdfReaderProcessName>
+  <OpenFileExpression>*.*</OpenFileExpression>
+  <CodeReaderComPort>com4</CodeReaderComPort>
+  <AutoConnectMode>false</AutoConnectMode>
+  <AppendCodeToBasePath>true</AppendCodeToBasePath>
+  <UseGlobalFilePattern>true</UseGlobalFilePattern>
+  <AskUserValidation>true</AskUserValidation>
+  <CloseExplorerWindows>true</CloseExplorerWindows>
+  <CloseViewers>true</CloseViewers>
+  <MinimizeApplication>false</MinimizeApplication>
+  <OpenBaseDirExplorerWindow>true</OpenBaseDirExplorerWindow>
+</ParameterStruct>

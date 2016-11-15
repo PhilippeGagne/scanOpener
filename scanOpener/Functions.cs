@@ -98,19 +98,44 @@ namespace scanOpener
             Thread.Sleep(200);
         }
 
-        public static void CloseAllPdfWindows(string pdf_module_name)
+        public static void CloseViewerWindows(string viewerProcessName)
         {
-            if (pdf_module_name != "")
+            if (viewerProcessName != "")
             {
+                string[] processNames = viewerProcessName.Split(new[] { ';', ':', ',' });
+                for (int i = 0; i < processNames.Length; i++)
+                    processNames[i] = processNames[i].Trim();
+
+                string errorsProcesses = "";
+                bool error = false;
+
                 foreach (Process p in Process.GetProcesses(System.Environment.MachineName))
                 {
-                    if (p.MainWindowHandle != IntPtr.Zero
-                        && string.Equals(p.ProcessName, pdf_module_name, StringComparison.OrdinalIgnoreCase))
+                    if (p.MainWindowHandle != IntPtr.Zero)
                     {
-                        bool result = p.CloseMainWindow();
-                        if (!result)
-                            MessageBox.Show("Impossible de fermer les fenêtres PDF.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        foreach (string t in processNames)
+                        {
+                            if (string.Equals(p.ProcessName, t, StringComparison.OrdinalIgnoreCase))
+                            {
+                                bool result = p.CloseMainWindow();
+                                if (!result)
+                                {
+                                    error = true;
+                                    if (errorsProcesses.Length > 0)
+                                        errorsProcesses += ", ";
+                                    errorsProcesses += p.MainWindowTitle;
+                                }
+
+                                break; // Terminé pour cette fenêtre.
+                            }
+                        }
                     }
+                }
+
+                if (error)
+                {
+                    string message = string.Format("Impossible de fermer les fenêtres {0}.", errorsProcesses);
+                    MessageBox.Show(message, "Fermeture des fenêtres", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
                 Application.DoEvents();

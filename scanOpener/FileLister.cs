@@ -59,6 +59,7 @@ namespace scanOpener
             // puisse utiliser une string, par exemple.
 
             bool retval = true;
+            bool displayCantOpen = false;
 
             // On donne une chance à Windows de faire le ménage de ses fichiers.
             Application.DoEvents();
@@ -67,7 +68,8 @@ namespace scanOpener
             {
                 if (ignoreKnownError && file.error)
                 {
-                    // Peut être qu'on ne veut pas réafficher les fichiers en erreur.
+                    // On affichera les erreurs à la fin.
+                    displayCantOpen = true;
                     continue;
                 }
 
@@ -121,7 +123,20 @@ namespace scanOpener
                 Application.DoEvents();
             }
 
-            return retval;
+            if (ignoreKnownError && verbose && displayCantOpen)
+            {
+                messages.Text += "Impossible d'ouvrir:" + Environment.NewLine;
+                foreach (FileListerInfos file in files)
+                {
+                    if (ignoreKnownError && file.error)
+                    {
+                        messages.Text += string.Format("   {0}{1}{1}", file.path, Environment.NewLine);
+                    }
+                }
+            }
+
+
+                return retval;
         }
 
         /// <summary>

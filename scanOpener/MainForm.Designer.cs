@@ -49,6 +49,7 @@
             this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.guiTimer = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
+            this.nouvelleConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -142,6 +143,7 @@
             // fichierToolStripMenuItem
             // 
             this.fichierToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.nouvelleConfigurationToolStripMenuItem,
             this.importerLaConfigurationToolStripMenuItem,
             this.exporterLaConfigurationToolStripMenuItem,
             this.toolStripSeparator1,
@@ -221,6 +223,13 @@
             this.label1.TabIndex = 15;
             this.label1.Text = "État du lecteur de code-barres :";
             // 
+            // nouvelleConfigurationToolStripMenuItem
+            // 
+            this.nouvelleConfigurationToolStripMenuItem.Name = "nouvelleConfigurationToolStripMenuItem";
+            this.nouvelleConfigurationToolStripMenuItem.Size = new System.Drawing.Size(263, 26);
+            this.nouvelleConfigurationToolStripMenuItem.Text = "Nouvelle configuration";
+            this.nouvelleConfigurationToolStripMenuItem.Click += new System.EventHandler(this.nouvelleConfigurationToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AcceptButton = this.btnOpen;
@@ -270,6 +279,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.Timer guiTimer;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripMenuItem nouvelleConfigurationToolStripMenuItem;
     }
 }
 
