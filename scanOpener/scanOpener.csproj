@@ -67,7 +67,7 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Icone.ico</ApplicationIcon>
+    <ApplicationIcon>Icone2.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -161,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icone.ico" />
+    <Content Include="Icone2.ico" />
     <None Include="Resources\LicenseText.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

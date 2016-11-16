@@ -39,6 +39,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fichierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nouvelleConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importerLaConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exporterLaConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -49,7 +50,6 @@
             this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.guiTimer = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
-            this.nouvelleConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -154,6 +154,13 @@
             this.fichierToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
             this.fichierToolStripMenuItem.Text = "Fichier";
             // 
+            // nouvelleConfigurationToolStripMenuItem
+            // 
+            this.nouvelleConfigurationToolStripMenuItem.Name = "nouvelleConfigurationToolStripMenuItem";
+            this.nouvelleConfigurationToolStripMenuItem.Size = new System.Drawing.Size(263, 26);
+            this.nouvelleConfigurationToolStripMenuItem.Text = "Nouvelle configuration";
+            this.nouvelleConfigurationToolStripMenuItem.Click += new System.EventHandler(this.nouvelleConfigurationToolStripMenuItem_Click);
+            // 
             // importerLaConfigurationToolStripMenuItem
             // 
             this.importerLaConfigurationToolStripMenuItem.Name = "importerLaConfigurationToolStripMenuItem";
@@ -222,13 +229,6 @@
             this.label1.Size = new System.Drawing.Size(209, 17);
             this.label1.TabIndex = 15;
             this.label1.Text = "État du lecteur de code-barres :";
-            // 
-            // nouvelleConfigurationToolStripMenuItem
-            // 
-            this.nouvelleConfigurationToolStripMenuItem.Name = "nouvelleConfigurationToolStripMenuItem";
-            this.nouvelleConfigurationToolStripMenuItem.Size = new System.Drawing.Size(263, 26);
-            this.nouvelleConfigurationToolStripMenuItem.Text = "Nouvelle configuration";
-            this.nouvelleConfigurationToolStripMenuItem.Click += new System.EventHandler(this.nouvelleConfigurationToolStripMenuItem_Click);
             // 
             // MainForm
             // 

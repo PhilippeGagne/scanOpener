@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ParamsForm));
             this.btnExit = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.btnSelectConvert = new System.Windows.Forms.Button();
@@ -59,9 +60,9 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.guiTimer = new System.Windows.Forms.Timer(this.components);
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -383,6 +384,15 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Fermeture automatique des fenêtres";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 44);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(225, 17);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "Ex: AcroRd32 pour acrobat reader";
+            // 
             // guiTimer
             // 
             this.guiTimer.Enabled = true;
@@ -400,15 +410,6 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Autres options";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 44);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(225, 17);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "Ex: AcroRd32 pour acrobat reader";
-            // 
             // ParamsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -422,6 +423,7 @@
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox6);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ParamsForm";
             this.Text = "Configuration";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.ParamsForm_Paint);
