@@ -33,11 +33,15 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Diagnostics;
 using System.Runtime.InteropServices; //required for APIs
+using NLog;
 
 namespace scanOpener
 {
     static class Program
     {
+        // Support de log
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         //Import the SetForeground API to activate it
         [DllImportAttribute("User32.dll")]
         private static extern IntPtr SetForegroundWindow(int hWnd);
@@ -50,6 +54,7 @@ namespace scanOpener
         {
 #if false
             // Démarrage traditionnel.
+            logger.Info("Start");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
@@ -60,12 +65,14 @@ namespace scanOpener
             {
                 if (createdNew)
                 {
+                    logger.Info("Start");
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);
                     Application.Run(new MainForm());
                 }
                 else
                 {
+                    logger.Info("Already running");
                     Process current = Process.GetCurrentProcess();
                     foreach (Process process in Process.GetProcessesByName(current.ProcessName))
                     {
@@ -80,6 +87,7 @@ namespace scanOpener
             }
 
 #endif
+            logger.Info("Stop");
         }
     }
 }

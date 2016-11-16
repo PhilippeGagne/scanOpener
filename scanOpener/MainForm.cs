@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 using static scanOpener.FileListerFunctions;
 using System.Collections.Generic;
 using System.Configuration;
+using NLog;
 
 namespace scanOpener
 {
@@ -38,11 +39,12 @@ namespace scanOpener
     {
         private System.IO.Ports.SerialPort mySerialPort;
 
-        /* Paramètres de fonctionnement principaux, visibles par l'utilisateur
-         * et sauvegardés.
-         */
+        // Paramètres de fonctionnement principaux, visibles par l'utilisateur
+        // et sauvegardés.
         private ParameterStruct Parameters;
 
+        // Support de log
+        private static Logger logger = LogManager.GetCurrentClassLogger();
 
         public MainForm()
         {
@@ -76,6 +78,9 @@ namespace scanOpener
         {
             // Code à barre.
             string selected = Functions.CleanupString(txtSelected.Text);
+
+            // Note l'événement
+            logger.Trace("ProcessOpenDirRequest: {0}", selected);
 
             // Liste des fichiers à ouvrir. La première colonne est
             // le répertoire où se trouvent les documents pertinents
@@ -149,6 +154,8 @@ namespace scanOpener
             // à ouvrir.
             Debug.Assert(selected_files.Length >= 2);
 
+            logger.Info("ProcessOpenDirRequest: {0} -> {1}", selected_files[0], selected_files[1]);
+
             bool open_ok;
   
             FileListerInfos[] files;
@@ -186,9 +193,11 @@ namespace scanOpener
             }
 
             // Vérifie si on a des erreurs, ce qui ne devrait pas arriver.
+            string fileListString = FileListerInfosAsText(files, true, true);
+
             if (MustStopFileListError(files))
             {
-                // TODO: log
+                logger.Warn("User stopped, some files missing{1}{0}", fileListString, Environment.NewLine);
                 return;
             }
 
@@ -204,15 +213,23 @@ namespace scanOpener
                 // TODO: s'organiser pour avoir la liste des fichiers à ouvrir.
                 bool valid = UserValidation(selected_files[0], selected_files[1], operations);
                 if (!valid)
+                {
+                    logger.Warn("Validation refused by user{1}{0}", fileListString, Environment.NewLine);
                     return;
+                }
             }
+
+            // On peut logger les opérations à faire.
+            logger.Info("Files to open:{1}{0}", fileListString, Environment.NewLine);
 
             // Rendu ici on peut ouvrir les fichiers.
             open_ok = FileListerFunctions.FileOpener(files, true, true, txtMessage);
-  
 
             if (!open_ok)
             {
+                // TODO: log plus explicite.
+                logger.Warn("Opening file errors");
+
                 // On a eu des problèmes lors de l'ouverture, on s'assure que la fenêtre est au premier plan.
                 BringWindowToFront();
             }
@@ -586,6 +603,8 @@ namespace scanOpener
         /// <param name="e"></param>
         private void nouvelleConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            logger.Info("ConfigNew");
+
             Properties.Settings.Default.Reset();
             LoadSettings();
             UpdateGUI();
@@ -602,6 +621,8 @@ namespace scanOpener
 
             if (result == DialogResult.OK)
             {
+                logger.Info("ConfigImport: {0}", fbd.FileName);
+
                 XmlSerializer reader = new XmlSerializer(Parameters.GetType());
 
                 StreamReader file = new StreamReader(fbd.FileName);
@@ -636,6 +657,8 @@ namespace scanOpener
 
             if (result == DialogResult.OK)
             {
+                logger.Info("ConfigExport: {0}", fbd.FileName);
+
                 XmlSerializer writer = new XmlSerializer(Parameters.GetType());
                 StreamWriter file = new StreamWriter(fbd.FileName);
                 writer.Serialize(file, Parameters);

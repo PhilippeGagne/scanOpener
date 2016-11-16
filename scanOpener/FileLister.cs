@@ -26,6 +26,7 @@
 //OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //////////////////////////////////////////////////////////////////////////////
 
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -38,12 +39,18 @@ namespace scanOpener
 {
     class FileListerFunctions
     {
+        /// <summary>
+        /// Structure d'information sur les fichiers à lire.
+        /// </summary>
         public struct FileListerInfos
         {
             public string path;
             public bool isDir;
             public bool error;
         }
+
+        // Support de log
+        private static Logger logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// Ouverture des répertoire et fichiers spécifiés dans la liste obtenue par FileLister.
@@ -77,6 +84,8 @@ namespace scanOpener
                 {
                     if (Directory.Exists(file.path))
                     {
+                        logger.Trace("Open dir: {0}", file.path);
+
                         if (verbose)
                         {
                             messages.Text += string.Format("Ouverture du répertoire{1}   {0}{1}{1}", file.path, Environment.NewLine);
@@ -88,6 +97,8 @@ namespace scanOpener
                     }
                     else
                     {
+                        logger.Warn("Open dir failed: {0}", file.path);
+
                         // On ne peut trouver le répertoire, on affiche une erreur.
                         messages.Text += string.Format("Impossible d'ouvrir le répertoire{1}   {0}{1}{1}", file.path, Environment.NewLine);
 
@@ -100,6 +111,8 @@ namespace scanOpener
                     // Il s'agit d'un fichier, pas d'un répertoire.
                     if (File.Exists(file.path))
                     {
+                        logger.Trace("Open file: {0}", file.path);
+
                         if (verbose)
                         {
                             messages.Text += string.Format("Ouverture du fichier{1}   {0}{1}{1}", file.path, Environment.NewLine);
@@ -111,6 +124,8 @@ namespace scanOpener
                     }
                     else
                     {
+                        logger.Warn("Open file failed: {0}", file.path);
+
                         // On ne peut trouver le répertoire, on affiche une erreur.
                         messages.Text += string.Format("Impossible d'ouvrir le fichier{1}   {0}{1}{1}", file.path, Environment.NewLine);
 
@@ -311,6 +326,46 @@ namespace scanOpener
             }
 
             return files.ToArray();
+        }
+
+        /// <summary>
+        /// Donne une représentation textuelle des informations de fichier.
+        /// 
+        /// Utile pour logger les erreurs.
+        /// </summary>
+        /// <param name="infos">La liste des fichiers</param>
+        /// <returns></returns>
+        public static string FileListerInfosAsText(FileListerInfos[] infos, bool padString, bool verbose)
+        {
+            string text = "";
+
+            int maxPathLength = 0;
+            foreach (var fi in infos)
+            {
+                maxPathLength = Math.Max(maxPathLength, fi.path.Length);
+            }
+
+            foreach (var fi in infos)
+            {
+                // Format les chaînes pour quelles soient alignées. 
+                string path;
+                path = fi.path.PadRight(maxPathLength);
+
+                string[] fileType = { "File", "Dir " };
+                string[] stateType = { "", "NotFound"};
+
+                string tval;
+                if (verbose)
+                    tval = string.Format("{0}\t{1}\t{2}",
+                                         path, 
+                                         fi.isDir ? fileType[1] : fileType[0], 
+                                         fi.error ? stateType[1] : stateType[0]);
+                else
+                    tval = string.Format("{0}", path);
+
+                text += tval + Environment.NewLine;
+            }
+            return text;
         }
     }
 }
