@@ -52,14 +52,10 @@ namespace scanOpener
         [STAThread]
         static void Main()
         {
-#if false
-            // Démarrage traditionnel.
-            logger.Info("Start");
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
-#else
-            // Mode singleton.
+
+            // Pour supporter le mode instance unique de l'application.
+            // ref: http://stackoverflow.com/questions/19147/what-is-the-correct-way-to-create-a-single-instance-application
+
             bool createdNew = true;
             using (Mutex mutex = new Mutex(true, "B8DA8ADA-E42C-4C26-BDF3-ABE7D79DF3E9", out createdNew))
             {
@@ -69,6 +65,7 @@ namespace scanOpener
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);
                     Application.Run(new MainForm());
+                    mutex.ReleaseMutex();
                 }
                 else
                 {
@@ -79,15 +76,39 @@ namespace scanOpener
                         if (process.Id != current.Id)
                         {
                             int hwnd = (int)process.MainWindowHandle;
-                            SetForegroundWindow(hwnd);
+                            // V1:
+                            //SetForegroundWindow(hwnd);
+                            
+                            // V2:
+                            // send our Win32 message to make the currently running instance
+                            // jump on top of all the other windows
+                            NativeMethods.PostMessage(
+                                (IntPtr)NativeMethods.HWND_BROADCAST,
+                                NativeMethods.WM_SHOWME,
+                                IntPtr.Zero,
+                                IntPtr.Zero);
+
+
                             break;
                         }
                     }
                 }
             }
 
-#endif
             logger.Info("Stop");
+        }
+
+        // Pour supporter le mode instance unique de l'application.
+        // ref: http://stackoverflow.com/questions/19147/what-is-the-correct-way-to-create-a-single-instance-application
+        // this class just wraps some Win32 stuff that we're going to use
+        internal class NativeMethods
+        {
+            public const int HWND_BROADCAST = 0xffff;
+            public static readonly int WM_SHOWME = RegisterWindowMessage("WM_SHOWME_B8DA8ADA-E42C-4C26-BDF3-ABE7D79DF3E9");
+            [DllImport("user32")]
+            public static extern bool PostMessage(IntPtr hwnd, int msg, IntPtr wparam, IntPtr lparam);
+            [DllImport("user32")]
+            public static extern int RegisterWindowMessage(string message);
         }
     }
 }
