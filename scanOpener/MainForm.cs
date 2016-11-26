@@ -69,7 +69,8 @@ namespace scanOpener
         {
             if (m.Msg == NativeMethods.WM_SHOWME)
             {
-                ShowMe();
+                //ShowMe();
+                BringWindowToFront();
             }
             base.WndProc(ref m);
         }
