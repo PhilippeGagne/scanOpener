@@ -366,7 +366,7 @@ namespace scanOpener
                         // Ajout à la liste
                         files.AddRange(file_list);
                     }
-                    catch (Exception ex)
+                    catch (Exception /*ex*/)
                     {
                         // TODO: Message d'erreur ?
                     }

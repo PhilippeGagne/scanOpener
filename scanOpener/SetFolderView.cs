@@ -27,13 +27,13 @@ namespace Set_folder_view_2
                 {
                     int tries = 0;
 
-                    WinAPI.ShellExecute(IntPtr.Zero, "Open", path, "", "", WinAPI.ShowCommands.SW_NORMAL);
+                    WinAPI.NativeMethods.ShellExecute(IntPtr.Zero, "Open", path, "", "", WinAPI.ShowCommands.SW_NORMAL);
 
                     IntPtr hwndFolder = IntPtr.Zero;
 
                     while (hwndFolder == IntPtr.Zero && tries < 100)
                     {
-                        hwndFolder = WinAPI.FindWindow("CabinetWClass", Path.GetFileName(path));
+                        hwndFolder = WinAPI.NativeMethods.FindWindow("CabinetWClass", Path.GetFileName(path));
                         tries++;
                         Thread.Sleep(100);
                     }

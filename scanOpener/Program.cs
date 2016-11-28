@@ -43,8 +43,8 @@ namespace scanOpener
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         //Import the SetForeground API to activate it
-        [DllImportAttribute("User32.dll")]
-        private static extern IntPtr SetForegroundWindow(int hWnd);
+        //[DllImportAttribute("User32.dll")]
+        //private static extern IntPtr SetForegroundWindow(int hWnd);
 
         /// <summary>
         /// The main entry point for the application.
@@ -107,7 +107,7 @@ namespace scanOpener
             public static readonly int WM_SHOWME = RegisterWindowMessage("WM_SHOWME_B8DA8ADA-E42C-4C26-BDF3-ABE7D79DF3E9");
             [DllImport("user32")]
             public static extern bool PostMessage(IntPtr hwnd, int msg, IntPtr wparam, IntPtr lparam);
-            [DllImport("user32")]
+            [DllImport("user32", CharSet = CharSet.Unicode)]
             public static extern int RegisterWindowMessage(string message);
         }
     }

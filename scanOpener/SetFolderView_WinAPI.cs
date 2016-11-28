@@ -31,11 +31,16 @@ namespace Set_folder_view_2
             SW_MAX = 11
         }
 
-        [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
-        public static extern IntPtr ShellExecute(IntPtr hwnd, string lpOperation, string lpFile, string lpParameters, string lpDirectory, ShowCommands nShowCmd);
+        internal class NativeMethods
+        {
 
-        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-        public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+            [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
+            public static extern IntPtr ShellExecute(IntPtr hwnd, string lpOperation, string lpFile, string lpParameters, string lpDirectory, ShowCommands nShowCmd);
+
+            [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+            public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+
+        }
 
         [ComImport, InterfaceType(ComInterfaceType.InterfaceIsIUnknown), Guid("6d5140c1-7436-11ce-8034-00aa006009fa"), SuppressUnmanagedCodeSecurity]
         public interface _IServiceProvider
@@ -95,10 +100,10 @@ namespace Set_folder_view_2
         [StructLayout(LayoutKind.Sequential)]
         public struct MSG
         {
-            public IntPtr hwnd;
+            private IntPtr hwnd;
             public uint message;
-            public IntPtr wParam;
-            public IntPtr lParam;
+            private IntPtr wParam;
+            private IntPtr lParam;
             public uint time;
             public POINT pt;
         }
