@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test files", "Test files", 
 		test\base\B\Fichier B 3.txt = test\base\B\Fichier B 3.txt
 	EndProjectSection
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "scanOpener setup", "scanOpener setup\scanOpener setup.vdproj", "{FE25A7F5-C777-41FC-BE40-49A2C05BE704}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,8 @@ Global
 		{5FBF4FF5-368A-4F91-B370-35A09E348FEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FBF4FF5-368A-4F91-B370-35A09E348FEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FBF4FF5-368A-4F91-B370-35A09E348FEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE25A7F5-C777-41FC-BE40-49A2C05BE704}.Debug|Any CPU.ActiveCfg = Debug
+		{FE25A7F5-C777-41FC-BE40-49A2C05BE704}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
