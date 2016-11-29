@@ -49,6 +49,8 @@ namespace scanOpener
             parameters.OpenBaseDirExplorerWindow = chkOpenBaseDir.Checked;
 
             parameters.AppendCodeToBasePath = chkAppendCodeToBasePath.Checked;
+
+            parameters.ClipboardCopy = chkClipboardCopy.Checked;
         }
 
         private void ParametersToDialog()
@@ -69,6 +71,8 @@ namespace scanOpener
             chkOpenBaseDir.Checked = parameters.OpenBaseDirExplorerWindow;
 
             chkAppendCodeToBasePath.Checked = parameters.AppendCodeToBasePath;
+
+            chkClipboardCopy.Checked = parameters.ClipboardCopy;
         }
 
         private void btnSelectBaseDir_Click(object sender, EventArgs e)

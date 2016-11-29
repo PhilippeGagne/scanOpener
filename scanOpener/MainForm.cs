@@ -34,6 +34,7 @@ namespace scanOpener
         public bool CloseViewers;
         public bool MinimizeApplication;
         public bool OpenBaseDirExplorerWindow;
+        public bool ClipboardCopy;
     }
 
     public partial class MainForm : Form
@@ -184,6 +185,12 @@ namespace scanOpener
             Debug.Assert(selected_files.Length >= 2);
 
             logger.Info("ProcessOpenDirRequest: {0} -> {1}", selected_files[0], selected_files[1]);
+
+            // On peut vouloir copier le nom de la pièce.
+            if (Parameters.ClipboardCopy)
+            {
+                Clipboard.SetText(selected_files[1]);
+            }
 
             bool open_ok;
   
@@ -454,6 +461,8 @@ namespace scanOpener
 
             Parameters.AppendCodeToBasePath = Properties.Settings.Default.AppendCodeToBasePath;
 
+            Parameters.ClipboardCopy = Properties.Settings.Default.ClipboardCopy;
+
             Width = Properties.Settings.Default.FormWidth;
             Height = Properties.Settings.Default.FormHeigth;
         }
@@ -479,6 +488,8 @@ namespace scanOpener
             Properties.Settings.Default.OpenBaseDirExplorerWindow = Parameters.OpenBaseDirExplorerWindow;
 
             Properties.Settings.Default.AppendCodeToBasePath = Parameters.AppendCodeToBasePath;
+
+            Properties.Settings.Default.ClipboardCopy = Parameters.ClipboardCopy;
 
             Properties.Settings.Default.FormWidth = Width;
             Properties.Settings.Default.FormHeigth = Height;

@@ -63,6 +63,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.guiTimer = new System.Windows.Forms.Timer(this.components);
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.chkClipboardCopy = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -75,7 +76,7 @@
             // 
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExit.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnExit.Location = new System.Drawing.Point(517, 551);
+            this.btnExit.Location = new System.Drawing.Point(517, 581);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(100, 35);
             this.btnExit.TabIndex = 3;
@@ -86,7 +87,7 @@
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button1.Location = new System.Drawing.Point(623, 551);
+            this.button1.Location = new System.Drawing.Point(623, 581);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 35);
             this.button1.TabIndex = 4;
@@ -401,20 +402,31 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.chkClipboardCopy);
             this.groupBox6.Controls.Add(this.chkAskUserValidation);
             this.groupBox6.Controls.Add(this.chkMinimizeApplication);
             this.groupBox6.Location = new System.Drawing.Point(12, 476);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(711, 61);
+            this.groupBox6.Size = new System.Drawing.Size(711, 99);
             this.groupBox6.TabIndex = 33;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Autres options";
+            // 
+            // chkClipboardCopy
+            // 
+            this.chkClipboardCopy.AutoSize = true;
+            this.chkClipboardCopy.Location = new System.Drawing.Point(10, 51);
+            this.chkClipboardCopy.Name = "chkClipboardCopy";
+            this.chkClipboardCopy.Size = new System.Drawing.Size(183, 21);
+            this.chkClipboardCopy.TabIndex = 2;
+            this.chkClipboardCopy.Text = "Copier dans le clipboard";
+            this.chkClipboardCopy.UseVisualStyleBackColor = true;
             // 
             // ParamsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(735, 598);
+            this.ClientSize = new System.Drawing.Size(735, 628);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -477,5 +489,6 @@
         private System.Windows.Forms.Button btnOpenDeviceManagementWindow;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox chkClipboardCopy;
     }
 }

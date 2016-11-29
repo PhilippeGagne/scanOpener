@@ -226,5 +226,17 @@ namespace scanOpener.Properties {
                 this["DocumentFilename"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ClipboardCopy {
+            get {
+                return ((bool)(this["ClipboardCopy"]));
+            }
+            set {
+                this["ClipboardCopy"] = value;
+            }
+        }
     }
 }
