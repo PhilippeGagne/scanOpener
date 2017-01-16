@@ -63,6 +63,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.guiTimer = new System.Windows.Forms.Timer(this.components);
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.chkExplorerIconModeDisplay = new System.Windows.Forms.CheckBox();
             this.chkClipboardCopy = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -402,6 +403,7 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.chkExplorerIconModeDisplay);
             this.groupBox6.Controls.Add(this.chkClipboardCopy);
             this.groupBox6.Controls.Add(this.chkAskUserValidation);
             this.groupBox6.Controls.Add(this.chkMinimizeApplication);
@@ -411,6 +413,16 @@
             this.groupBox6.TabIndex = 33;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Autres options";
+            // 
+            // chkExplorerIconModeDisplay
+            // 
+            this.chkExplorerIconModeDisplay.AutoSize = true;
+            this.chkExplorerIconModeDisplay.Location = new System.Drawing.Point(281, 52);
+            this.chkExplorerIconModeDisplay.Name = "chkExplorerIconModeDisplay";
+            this.chkExplorerIconModeDisplay.Size = new System.Drawing.Size(293, 21);
+            this.chkExplorerIconModeDisplay.TabIndex = 3;
+            this.chkExplorerIconModeDisplay.Text = "Affichage des répertoires en mode icônes";
+            this.chkExplorerIconModeDisplay.UseVisualStyleBackColor = true;
             // 
             // chkClipboardCopy
             // 
@@ -435,7 +447,10 @@
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox6);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ParamsForm";
             this.Text = "Configuration";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.ParamsForm_Paint);
@@ -490,5 +505,6 @@
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox chkClipboardCopy;
+        private System.Windows.Forms.CheckBox chkExplorerIconModeDisplay;
     }
 }

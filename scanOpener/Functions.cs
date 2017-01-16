@@ -65,10 +65,10 @@ namespace scanOpener
             return output;
         }
 
-        public static void OpenExplorerWindow(string path)
+        public static void OpenExplorerWindow(string path, bool iconMode)
         {
             Application.DoEvents();
-            Set_folder_view_2.Program.SetFolderView(path, Set_folder_view_2.WinAPI.FOLDERVIEWMODE.FVM_ICON);
+            Set_folder_view_2.Program.SetFolderView(path, iconMode ? Set_folder_view_2.WinAPI.FOLDERVIEWMODE.FVM_ICON : Set_folder_view_2.WinAPI.FOLDERVIEWMODE.FVM_DETAILS);
 
             // Work aroud pour se donner une chance que windows ait terminé d'ouvrir l'explorateur avant
             // d'ouvrir les autres fenêtres.
@@ -150,7 +150,7 @@ namespace scanOpener
         /// <param name="selected_files">Ligne complète de la table de converion {code_barre, code, [it1], [it2], ...}. </param>
         /// <param name="messages">TextBox pour afficher les messages.</param>
         /// <returns></returns>
-        public static bool OpenDirectoryAndFiles(string base_dir, string[] selected_files, TextBox messages)
+        public static bool OpenDirectoryAndFiles(string base_dir, string[] selected_files, TextBox messages, bool explorerIconModeDisplay)
         {
             bool retval = true;
 
@@ -164,7 +164,7 @@ namespace scanOpener
                 string message = string.Format("Ouverture du répertoire:{0}{1}", full_path, Environment.NewLine);
                 messages.Text += message;
 
-                OpenExplorerWindow(full_path);
+                OpenExplorerWindow(full_path, explorerIconModeDisplay);
 
                 // Ouverture des fichiers optionnels
                 for (int i=2; i<selected_files.Length; i++)
@@ -206,7 +206,7 @@ namespace scanOpener
         /// <param name="paths">Liste de fichiers et répertoires.</param>
         /// <param name="messages">TextBox pour afficher les messages</param>
         /// <returns></returns>
-        public static bool OpenDirectoryAndFiles(string[] paths, TextBox messages)
+        public static bool OpenDirectoryAndFiles(string[] paths, TextBox messages, bool explorerIconModeDisplay)
         {
             bool retval = true;
 
@@ -219,7 +219,7 @@ namespace scanOpener
                 {
                     string message = string.Format("Ouverture du répertoire : {0}{1}", path, Environment.NewLine);
                     messages.Text += message;
-                    OpenExplorerWindow(path);
+                    OpenExplorerWindow(path, explorerIconModeDisplay);
                 }
                 else if (File.Exists(path))
                 {
@@ -250,7 +250,7 @@ namespace scanOpener
         /// <param name="paths">Liste de fichiers et répertoires.</param>
         /// <param name="messages">TextBox pour afficher les messages</param>
         /// <returns></returns>
-        public static bool OpenDirectoryAndFilesInterpolatif(string base_dir, string[] selected_files, bool OpenBaseDirExplorerWindow, TextBox messages)
+        public static bool OpenDirectoryAndFilesInterpolatif(string base_dir, string[] selected_files, bool OpenBaseDirExplorerWindow, TextBox messages, bool explorerIconModeDisplay)
         {
             bool retval = true;
 
@@ -272,7 +272,7 @@ namespace scanOpener
                 {
                     string message = string.Format("Ouverture du répertoire:{0}{1}", full_path, Environment.NewLine);
                     messages.Text += message;
-                    OpenExplorerWindow(full_path);
+                    OpenExplorerWindow(full_path, explorerIconModeDisplay);
                 }
                 else
                 {
@@ -289,7 +289,7 @@ namespace scanOpener
                     {
                         string doc_message = string.Format("Ouverture du répertoire : {0}{1}", path, Environment.NewLine);
                         messages.Text = doc_message;
-                        OpenExplorerWindow(path);
+                        OpenExplorerWindow(path, explorerIconModeDisplay);
                     }
                     else if (File.Exists(path))
                     {

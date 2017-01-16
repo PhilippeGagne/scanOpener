@@ -35,6 +35,7 @@ namespace scanOpener
         public bool MinimizeApplication;
         public bool OpenBaseDirExplorerWindow;
         public bool ClipboardCopy;
+        public bool ExplorerIconMode;
     }
 
     public partial class MainForm : Form
@@ -259,7 +260,7 @@ namespace scanOpener
             logger.Info("Files to open:{1}{0}", fileListString, Environment.NewLine);
 
             // Rendu ici on peut ouvrir les fichiers.
-            open_ok = FileListerFunctions.FileOpener(files, true, true, txtMessage);
+            open_ok = FileListerFunctions.FileOpener(files, true, true, txtMessage, Parameters.ExplorerIconMode);
 
             if (!open_ok)
             {
@@ -463,6 +464,8 @@ namespace scanOpener
 
             Parameters.ClipboardCopy = Properties.Settings.Default.ClipboardCopy;
 
+            Parameters.ExplorerIconMode = Properties.Settings.Default.ExplorerIconMode;
+
             Width = Properties.Settings.Default.FormWidth;
             Height = Properties.Settings.Default.FormHeigth;
         }
@@ -490,6 +493,8 @@ namespace scanOpener
             Properties.Settings.Default.AppendCodeToBasePath = Parameters.AppendCodeToBasePath;
 
             Properties.Settings.Default.ClipboardCopy = Parameters.ClipboardCopy;
+
+            Properties.Settings.Default.ExplorerIconMode = Parameters.ExplorerIconMode;
 
             Properties.Settings.Default.FormWidth = Width;
             Properties.Settings.Default.FormHeigth = Height;

@@ -238,5 +238,17 @@ namespace scanOpener.Properties {
                 this["ClipboardCopy"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ExplorerIconMode {
+            get {
+                return ((bool)(this["ExplorerIconMode"]));
+            }
+            set {
+                this["ExplorerIconMode"] = value;
+            }
+        }
     }
 }

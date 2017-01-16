@@ -60,7 +60,7 @@ namespace scanOpener
         /// <param name="verbose">Afficher, en plus des erreurs, les opérations d'ouverture dans les messages.</param>
         /// <param name="messages">Messages de progression.</param>
         /// <returns></returns>
-        public static bool FileOpener(FileListerInfos[] files, bool ignoreKnownError, bool verbose, TextBox messages)
+        public static bool FileOpener(FileListerInfos[] files, bool ignoreKnownError, bool verbose, TextBox messages, bool explorerIconMode)
         {
             // TODO: On pourrait utiliser une inversion de responsabilité pour éviter de dépendre d'un textbox, mais qu'on
             // puisse utiliser une string, par exemple.
@@ -91,7 +91,7 @@ namespace scanOpener
                             messages.Text += string.Format("Ouverture du répertoire{1}   {0}{1}{1}", file.path, Environment.NewLine);
                         }
 
-                        Functions.OpenExplorerWindow(file.path);
+                        Functions.OpenExplorerWindow(file.path, explorerIconMode);
 
                         // TODO: On a pas de preuve qu'il a été posible de l'ouvrir.
                     }
