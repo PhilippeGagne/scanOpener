@@ -352,7 +352,11 @@ namespace scanOpener
         {
             // Vérifie si le port COM est ouvert et ajuste le GUI pour afficher l'état.
             bool connected = mySerialPort != null && mySerialPort.IsOpen;
-            chkConnected.Checked = connected;
+
+            if (connected)
+                txtConnected.Text = "Connecté";
+            else
+                txtConnected.Text = "Déconnecté";
 
             if (!timerTrigger)
             {
